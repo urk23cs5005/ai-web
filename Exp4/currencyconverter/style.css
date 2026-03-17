@@ -1,0 +1,10 @@
+body { font-family: Arial, sans-serif; display: flex; justify-content: center; margin-top: 50px; }
+.converter-box { border: 3px solid black; padding: 20px; width: 350px; }
+.title { color: blue; text-align: center; margin-top: 0; }
+label { font-weight: bold; color: #333; }
+input, select { width: 100%; padding: 5px; margin: 10px 0; border: 2px solid black; font-size: 16px; }
+.result-display { 
+    background-color: blue; color: white; 
+    text-align: center; padding: 10px; 
+    border-radius: 20px; font-size: 20px; margin-top: 15px; 
+}

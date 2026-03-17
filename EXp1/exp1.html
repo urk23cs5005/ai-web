@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration & Promotional Portal</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: auto; padding: 20px; background-color: #f4f4f4; }
+        header { text-align: center; background: #333; color: #fff; padding: 1rem; border-radius: 8px; }
+        section { background: white; padding: 20px; margin-top: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        img { width: 100%; height: auto; border-radius: 8px; }
+        video, audio { width: 100%; margin-top: 10px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input[type="text"], input[type="email"], input[type="date"], select, textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .radio-group { display: flex; gap: 15px; }
+        .btn-submit { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; }
+        .btn-submit:hover { background: #218838; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Tech-Innovate 2025</h1>
+        <p>Join the Future of Technology</p>
+    </header>
+
+    <!-- Media Section: Image, Video, and Audio -->
+    <section id="promotion">
+        <h2>Event Highlights</h2>
+        <!-- TC02: Image Media -->
+        <img src="Lab10.jpg" alt="Event Banner">
+        
+        <!-- TC03: Video Media -->
+        <h3>Watch our Promo</h3>
+        <video controls poster="via.placeholder.com" width="320" height="240"   >
+            <source src="C:\Users\STUDENTS\EXp1\vid1.mov" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- TC04: Audio Media -->
+        <h3>Listen to Introduction</h3>
+        <audio controls>
+            <source src="audio.mp3" type="audio/mp3">
+            Your browser does not support the audio element.
+        </audio>
+    </section>
+
+    <!-- Registration Form Section -->
+    <section id="registration">
+        <h2>Registration Form</h2>
+        <form action="#" method="POST" enctype="multipart/form-data">
+            
+            <!-- TC05 & TC06: Basic Inputs & Validation -->
+            <div class="form-group">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" placeholder="John Doe" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" placeholder="abc@gmail.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="event-date">Preferred Session Date:</label>
+                <input type="date" id="event-date" name="event-date" required>
+            </div>
+
+            <!-- TC07: Selection Inputs -->
+            <div class="form-group">
+                <label>Attendee Type:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="user-type" value="student" required> Student</label>
+                    <label><input type="radio" name="user-type" value="professional"> Professional</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="workshop">Choose Workshop:</label>
+                <select id="workshop" name="workshop">
+                    <option value="web-dev">Web Development</option>
+                    <option value="ai-ml">AI & Machine Learning</option>
+                    <option value="cyber-security">Cyber Security</option>
+                </select>
+            </div>
+
+            <!-- TC08: Textarea & File -->
+            <div class="form-group">
+                <label for="comments">Why do you want to attend?</label>
+                <textarea id="comments" name="comments" rows="4" placeholder="Enter your motivation here..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="id-proof">Upload ID Proof (PDF/Image):</label>
+                <input type="file" id="id-proof" name="id-proof" accept=".pdf, image/*">
+            </div>
+
+            <!-- TC09: Submission -->
+            <button type="submit" class="btn-submit">Register Now</button>
+        </form>
+    </section>
+
+    <footer style="text-align: center; padding: 20px; color: #666;">
+        <p>&copy; 2025 Online Event Portal. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    /* Use flexbox to easily center the main content container */
+    display: flex; 
+    justify-content: center; /* Horizontally centers content */
+    min-height: 100vh; /* Ensures body takes up full screen height for centering */
+}
+
+/* New wrapper to contain all main sections and make them center-aligned */
+.container {
+    max-width: 800px;
+    width: 100%;
+    /* Replaces margin: auto on body to allow flex centering to work */
+    margin: 20px; 
+}
+
+header {
+    text-align: center;
+    background: #2823666e;
+    color: #fff;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+section {
+    background: #ae79cc28;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+img, video, audio {
+    width: 100%; /* Ensures media scales correctly within its container */
+    height: auto;
+    border-radius: 8px;
+    display: block; /* Treats media as a block element */
+    margin-left: auto; /* Centers the block horizontally */
+    margin-right: auto; /* Centers the block horizontally */
+}
+
+/* The audio player needs specific styling to center the controls */
+audio {
+    width: 50%; /* You can adjust the width as needed */
+    margin: 10px auto; /* Centers horizontally and adds vertical margin */
+    display: block;
+}
+
+
+.form-group { margin-bottom: 15px; }
+label { display: block; font-weight: bold; margin-bottom: 5px; }
+input, input[type="email"], input[type="date"], select, textarea { 
+    width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; 
+}
+.radio-group { display: flex; gap: 15px; }
+.btn-submit { 
+    background: #2823666e; color: white; padding: 10px 20px; border: none; border-radius: 4px; 
+    cursor: pointer; width: 100%; font-size: 16px; 
+}
+.btn-submit:hover { background: #4054556e; }
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #858080;
+}

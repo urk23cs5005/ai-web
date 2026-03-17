@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuizMaster Pro | Elite 5</title>
+    <!-- TC01: Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com" rel="stylesheet">
+    
+    <style>
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.95);
+            --primary-grad: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body { 
+            background: var(--primary-grad); 
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            padding: 20px 0;
+        }
+
+        .quiz-container { 
+            max-width: 700px; 
+            margin: 20px auto; 
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .timer-box { 
+            position: sticky; 
+            top: 10px; 
+            z-index: 100; 
+            border-radius: 15px; 
+            background: white;
+            border-left: 6px solid #667eea;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .question-card { 
+            border: none; 
+            background: rgba(0,0,0,0.02);
+            border-radius: 18px; 
+            transition: 0.3s ease; 
+            margin-bottom: 15px;
+            padding: 20px;
+        }
+
+        .question-card:hover { 
+            transform: translateY(-3px);
+            background: #fff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        .btn-submit {
+            background: var(--primary-grad);
+            border: none; color: white; font-weight: 600;
+            padding: 16px; border-radius: 15px; transition: 0.3s;
+        }
+
+        .btn-submit:hover:not(:disabled) {
+            transform: scale(1.01);
+            box-shadow: 0 10px 25px rgba(118, 75, 162, 0.4);
+        }
+
+        .header-img { border-radius: 20px; margin-bottom: 25px; width: 100%; object-fit: cover; }
+    </style>
+</head>
+<body onload="startQuiz()">
+
+    <div class="container">
+        <div class="quiz-container text-center">
+            
+            <!-- TC05: Header Image -->
+            <img src="download.jpg" class="img-fluid header-img shadow-sm" alt="Quiz Time">
+
+            <!-- TC03: Timer Area -->
+            <div class="card timer-box mb-4">
+                <div class="card-body d-flex justify-content-between align-items-center py-2">
+                    <h5 class="mb-0">⏳ Time: <span id="timer-val" class="text-primary fw-bold">10</span>s</h5>
+                    <div id="warning" class="badge rounded-pill bg-danger" style="display:none; font-size: 0.85rem; padding: 8px 12px;">
+                        ⚠️ Only 5s remaining!
+                    </div>
+                </div>
+            </div>
+
+            <form id="quizForm" class="text-start">
+                
+                <!-- Q1: Radio Selection -->
+                <div class="card question-card shadow-sm">
+                    <p class="fw-bold mb-3">1. Which language runs in a web browser?</p>
+                    <div class="d-flex gap-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" value="Java" id="q1a">
+                            <label class="form-check-label" for="q1a">Java</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q1" value="JavaScript" id="q1b">
+                            <label class="form-check-label" for="q1b">JavaScript</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q2: Text Input (onkeyup) -->
+                <div class="card question-card shadow-sm">
+                    <p class="fw-bold mb-2">2. What does CSS stand for?</p>
+                    <div class="input-group">
+                        <input type="text" id="q2-input" class="form-control border-0 bg-white" placeholder="Type 'Cascading'..." onkeyup="validateTyping(this)">
+                        <span class="input-group-text bg-white border-0 text-muted small">Hint: Cascading...</span>
+                    </div>
+                </div>
+
+                <!-- Q3: Dropdown Select -->
+                <div class="card question-card shadow-sm">
+                    <p class="fw-bold mb-2">3. Is 10 > 5?</p>
+                    <select class="form-select border-0" id="q3-select">
+                        <option value="">Select choice...</option>
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
+                </div>
+
+                <!-- Q4: Radio Selection -->
+                <div class="card question-card shadow-sm">
+                    <p class="fw-bold mb-3">4. Which tag is used for images?</p>
+                    <div class="d-flex gap-4">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" value="img" id="q4a">
+                            <label class="form-check-label" for="q4a">img</label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="q4" value="div" id="q4b">
+                            <label class="form-check-label" for="q4b">div</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Q5: Number Input -->
+                <div class="card question-card shadow-sm">
+                    <p class="fw-bold mb-2">5. 2 + 2 = ?</p>
+                    <input type="number" id="q5-input" class="form-control border-0 bg-white" placeholder="Enter your answer">
+                </div>
+
+                <!-- TC07: Submission Button -->
+                <button type="button" id="submitBtn" class="btn btn-submit w-100 mt-3 shadow" onclick="calculateScore()">
+                    🚀 Finish Quiz
+                </button>
+            </form>
+
+            <div id="results" class="mt-4"></div>
+        </div>
+    </div>
+
+    <script>
+        let timeLeft = 10;
+        let timer;
+        const answers = { q1: "JavaScript", q2: "cascading", q3: "true", q4: "img", q5: "4" };
+
+        function startQuiz() {
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer-val').innerText = timeLeft;
+                if (timeLeft === 5) document.getElementById('warning').style.display = 'block';
+                if (timeLeft <= 0) { clearInterval(timer); calculateScore(); }
+            }, 1000);
+        }
+
+        function validateTyping(el) {
+            if(el.value.toLowerCase() === answers.q2) el.style.borderLeft = "4px solid #2ecc71";
+            else el.style.borderLeft = "none";
+        }
+
+        function calculateScore() {
+            clearInterval(timer);
+            let score = 0;
+            
+            // DOM Access: querySelector & getElementById
+            const q1 = document.querySelector('input[name="q1"]:checked')?.value;
+            const q2 = document.getElementById('q2-input').value.trim().toLowerCase();
+            const q3 = document.getElementById('q3-select').value;
+            const q4 = document.querySelector('input[name="q4"]:checked')?.value;
+            const q5 = document.getElementById('q5-input').value;
+
+            if (q1 === answers.q1) score++;
+            if (q2 === answers.q2) score++;
+            if (q3 === answers.q3) score++;
+            if (q4 === answers.q4) score++;
+            if (q5 === answers.q5) score++;
+
+            // TC - Disable all inputs using getElementsByTagName
+            const inputs = document.getElementsByTagName("input");
+            for(let i=0; i < inputs.length; i++) inputs[i].disabled = true;
+            document.getElementById('q3-select').disabled = true;
+            document.getElementById('submitBtn').disabled = true;
+
+            // Stylish Results Display
+            document.getElementById('results').innerHTML = `
+                <div class="alert bg-white py-4 shadow-lg border-0" style="border-radius: 20px;">
+                    <h2 class="fw-bold" style="color: #764ba2;">Score: ${score} / 5</h2>
+                    <p class="text-muted">Auto-submitted successfully!</p>
+                    <button class="btn btn-sm btn-outline-primary" onclick="location.reload()">Restart Quiz</button>
+                </div>`;
+            
+            document.getElementById('warning').innerHTML = "🏁 Quiz Finished!";
+            document.getElementById('timer-val').parentElement.classList.add('text-muted');
+        }
+    </script>
+</body>
+</html>

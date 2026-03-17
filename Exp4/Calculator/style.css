@@ -1,0 +1,7 @@
+body { font-family: sans-serif; background-color: #f0f0f0; display: flex; justify-content: center; padding-top: 50px; }
+.calculator-container { background: #e0e0e0; padding: 20px; border-radius: 8px; width: 600px; text-align: center; }
+.input-group, .button-group, .result-group { margin-bottom: 20px; display: flex; justify-content: space-between; gap: 10px; }
+input { padding: 10px; border: 1px solid #ccc; width: 45%; }
+.op-btn { background-color: #337ab7; color: white; border: none; padding: 10px; flex: 1; cursor: pointer; }
+#result { width: 70%; background-color: #eee; }
+#clear-btn { background-color: #d9534f; color: white; border: none; padding: 10px; width: 25%; cursor: pointer; }

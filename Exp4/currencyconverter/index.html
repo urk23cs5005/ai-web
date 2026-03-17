@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Currency Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="converter-box">
+        <h1 class="title">Currency Converter</h1>
+        
+        <label>Amount:</label><br>
+        <!-- onchange trigger for real-time update -->
+        <input type="number" id="amount" value="11" onchange="convert()">
+        
+        <br><label>From:</label><br>
+        <select id="fromCurrency" onchange="convert()">
+            <option value="USD">USD</option>
+            <option value="INR">INR</option>
+        </select>
+        
+        <br><label>To:</label><br>
+        <select id="toCurrency" onchange="convert()">
+            <option value="INR" selected>INR</option>
+            <option value="USD">USD</option>
+        </select>
+        
+        <div id="result" class="result-display">Amount = 792</div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
