@@ -1,0 +1,78 @@
+<!-- register.html -->
+<style>
+    .error { color: red; display: none; font-size: 12px; margin-left: 10px; }
+    .invalid { border: 2px solid red; }
+    #msg { margin-top: 10px; font-weight: bold; }
+</style>
+
+<form id="regForm">
+    Name: <input type="text" id="name"><span class="error">Required</span><br><br>
+    Email: <input type="text" id="email"><span class="error">Invalid Email</span><br><br>
+    <!-- The readonly event field -->
+    Event: <input type="text" id="event" readonly style="background-color: #eee;"><br><br>
+    Mobile: <input type="text" id="mobile"><span class="error">10 Digits required</span><br><br>
+    
+    <button type="submit" id="submitBtn">Submit</button>
+    <button type="button" id="resetBtn">Reset</button>
+</form>
+<div id="msg"></div>
+
+<!-- FIXED JQUERY LINK -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    // 1. Retrieve the Event Name from the URL (?event=Title)
+    const params = new URLSearchParams(window.location.search);
+    const selectedEvent = params.get('event');
+
+    if (selectedEvent) {
+        // Display the name in the non-editable field
+        $("#event").val(decodeURIComponent(selectedEvent));
+    }
+
+    $("#regForm").submit(function(e) {
+        e.preventDefault();
+        $(".error").hide();
+        $("input").removeClass("invalid");
+
+        let name = $("#name").val().trim();
+        let email = $("#email").val().trim();
+        let mobile = $("#mobile").val().trim();
+        let emailReg = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        let isValid = true;
+
+        // Validation logic
+        if(name === "") { 
+            $("#name").addClass("invalid").next(".error").show(); 
+            isValid = false; 
+        }
+        if(email === "" || !emailReg.test(email)) { 
+            $("#email").addClass("invalid").next(".error").show(); 
+            isValid = false; 
+        }
+        if(mobile.length < 10 || isNaN(mobile)) { 
+            $("#mobile").addClass("invalid").siblings(".error").last().show(); 
+            isValid = false; 
+        }
+
+        if(isValid) {
+            // Success Message
+            $("#msg").text("Registration Successful for " + name).css("color", "green");
+            // Disable button and change text
+            $("#submitBtn").prop("disabled", true).text("Registered");
+        }
+    });
+
+    // Reset functionality
+    $("#resetBtn").click(function() {
+        $("#regForm")[0].reset();
+        $("#msg").text("");
+        $("input").removeClass("invalid");
+        $(".error").hide();
+        $("#submitBtn").prop("disabled", false).text("Submit");
+        // Keep the event name even after reset
+        $("#event").val(decodeURIComponent(selectedEvent));
+    });
+});
+</script>

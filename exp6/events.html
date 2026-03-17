@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .event { padding: 15px; border: 1px solid #ccc; margin: 10px; width: 300px; transition: background 0.3s; }
+        .details { display: none; margin-top: 10px; background: #f9f9f9; padding: 10px; }
+        .highlight-title { color: darkblue; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="event">
+    <h3>Coding Challenge</h3>
+    <p>Date: Oct 25, 2023</p>
+    <button class="toggle-btn">Show Details</button>
+    <div class="details">
+        <p>Expert-level competitive programming.</p>
+        <button class="reg-btn">Register</button>
+    </div>
+</div>
+
+<div class="event">
+    <h3>Web Design</h3>
+    <p>Date: Oct 26, 2023</p>
+    <button class="toggle-btn">Show Details</button>
+    <div class="details">
+        <p>UI/UX and Frontend development contest.</p>
+        <button class="reg-btn">Register</button>
+    </div>
+</div>
+
+<!-- FIXED JQUERY LINK -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    $(".toggle-btn").click(function() {
+        // Use closest() to reliably find the parent container
+        let eventDiv = $(this).closest(".event");
+        let detailsDiv = eventDiv.find(".details");
+        let title = eventDiv.find("h3").text();
+
+        // 1. slideToggle effect
+        detailsDiv.slideToggle();
+
+        // 2. Toggle button text
+        $(this).text($(this).text() === "Show Details" ? "Hide Details" : "Show Details");
+
+        // 3. Change background of ONLY the selected event and reset others
+        eventDiv.css("background-color", "#e1f5fe");
+        eventDiv.siblings(".event").css("background-color", "#fff");
+
+        // 4. Highlight <h3>
+        eventDiv.find("h3").addClass("highlight-title");
+        eventDiv.siblings().find("h3").removeClass("highlight-title");
+
+        // 5. Alert Title
+        alert("Event Selected: " + title);
+    });
+
+    // 6. Redirect with data
+    $(".reg-btn").click(function() {
+        let eventTitle = $(this).closest(".event").find("h3").text();
+        window.location.href = "register.html?event=" + encodeURIComponent(eventTitle);
+    });
+});
+</script>
+</body>
+</html>
