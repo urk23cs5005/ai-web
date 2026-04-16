@@ -1,0 +1,18 @@
+body {
+    font-family: Arial;
+    margin: 0;
+    padding: 0;
+}
+
+.hero {
+    height: 90vh;
+    background: linear-gradient(to right, #007bff, #00c6ff);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h1 {
+    margin-bottom: 20px;
+}
