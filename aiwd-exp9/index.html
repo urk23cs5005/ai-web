@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event Registration</title>
+</head>
+<body>
+
+    <h2>Event Registration Form</h2>
+
+    <form id="regForm" method="POST" action="/register">
+
+        <label>Register Number:</label><br>
+        <input type="text" name="regno" required><br><br>
+
+        <label>Name:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>Select Events (Max 3):</label><br>
+
+        <input type="checkbox" name="events" value="Coding Challenge"> Coding Challenge<br>
+        <input type="checkbox" name="events" value="Debugging Contest"> Debugging Contest<br>
+        <input type="checkbox" name="events" value="Web Design"> Web Design<br>
+        <input type="checkbox" name="events" value="Quiz Competition"> Quiz Competition<br>
+        <input type="checkbox" name="events" value="Paper Presentation"> Paper Presentation<br><br>
+
+        <button type="submit">Register</button>
+
+    </form>
+
+    <p id="error" style="color:red;"></p>
+
+    <script>
+        const form = document.getElementById("regForm");
+
+        form.addEventListener("submit", function(e) {
+            const checked = document.querySelectorAll('input[name="events"]:checked');
+
+            if (checked.length > 3) {
+                e.preventDefault();
+                document.getElementById("error").innerText = "You can select maximum 3 events only!";
+            }
+        });
+    </script>
+
+</body>
+</html>
